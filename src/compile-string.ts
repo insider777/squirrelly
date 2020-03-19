@@ -166,7 +166,8 @@ export function compileScope (buff: Array<AstObject>, env: SqrlConfig) {
         // self-closing helper
       } else if (type === '!') {
         // execute
-        returnStr += content
+        // ensure a colon exists at the end so {{!console.log('bla works')}}
+        returnStr += content.lastIndexOf(';') == content.length - 1 ? content : content + ';'
       } else if (type === '?') {
         // custom (implement later)
       }
